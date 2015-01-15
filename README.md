@@ -1,1 +1,1 @@
-# utilities
+# Utilities tool belt for Tenreads development stack
