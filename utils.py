@@ -5,7 +5,7 @@ __all__ = ("ProcessManager",)
 
 import sys
 sys.dont_write_bytecode = True
-from multiprocessing import Process, cpu_count
+from multiprocessing import Process, cpu_count, Pool
 from time import sleep
 import random
 from types import FunctionType
@@ -19,7 +19,9 @@ class ProcessManager(object):
         self.slots = []
         self.buffer = []
         self.callback_map = {}
+        self.response_map = {}
         self.started = False
+        self.pool = Pool()
 
     def add(self, handler, args=None, kwargs=None, callback=None):
 
