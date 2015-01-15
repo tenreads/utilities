@@ -22,8 +22,8 @@ class ProcessManager(object):
 
     def add(self, handler, args=None, kwargs=None, callback=None):
 
-        args = args or ()
-        kwargs = kwargs or {}
+        args = args if isinstance(args, (list, tuple)) else ()
+        kwargs = kwargs if isinstance(kwargs, dict) else {}
 
         _process = Process(target=handler, args=args, kwargs=kwargs)
         if len(self.slots) < self.slot_size:
