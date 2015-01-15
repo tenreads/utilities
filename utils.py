@@ -8,6 +8,7 @@ sys.dont_write_bytecode = True
 from multiprocessing import Process, cpu_count
 from time import sleep
 import random
+from types import FunctionType
 
 
 class ProcessManager(object):
@@ -24,6 +25,8 @@ class ProcessManager(object):
 
         args = args if isinstance(args, (list, tuple)) else ()
         kwargs = kwargs if isinstance(kwargs, dict) else {}
+        callback = callback if isinstance(
+            callback, FunctionType) else None
 
         _process = Process(target=handler, args=args, kwargs=kwargs)
         if len(self.slots) < self.slot_size:
