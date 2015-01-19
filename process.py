@@ -33,12 +33,14 @@ class ProcessManager(object):
         self.callbacks = {}
 
     def __repr__(self):
+        _added = len(self.processes) + len(self.buffer)
         return "<ProcessManager - Slot size[%s] - Added[%s]>" % \
-            (self.process_count, len(self.processes) + len(self.buffer))
+            (self.process_count, _added)
 
     def __str__(self):
+        _added = len(self.processes) + len(self.buffer)
         return "<ProcessManager - Slot size[%s] - Added[%s]>" % \
-            (self.process_count, len(self.processes) + len(self.buffer))
+            (self.process_count, _added)
 
     def add(self, handler, args=None, kwargs=None, callback=None):
         handler = handler if isinstance(handler, FunctionType) else None
