@@ -47,7 +47,10 @@ class ProcessManager(object):
         callback = callback if isinstance(callback, FunctionType) else None
 
         if handler:
-            process = CustomProcess(target=handler, args=args, kwargs=kwargs, queue=self.queue)
+            process = CustomProcess(target=handler,
+                                    args=args,
+                                    kwargs=kwargs,
+                                    queue=self.queue)
             if len(self.processes) < self.process_count:
                 # add process
                 self.processes.append(process)
