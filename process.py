@@ -45,8 +45,10 @@ class ProcessManager(object):
         Defaults to CPU count if None.
         """
         _count = cpu_count()
-        self.process_count = processes if isinstance(processes, int) \
-            and 0 < processes <_count else _count
+        if not isinstance(processes, int) or processes > 2 * _count:
+            self.process_count = 2 * _count
+        else:
+            self.process_count = processes
         self.processes = []
         self.buffer = []
         self.queue = Queue()
@@ -117,3 +119,5 @@ class ProcessManager(object):
                             self.processes.append(_item)
                             self.buffer.remove(_item)
                             _item.start()
+                    # else:
+                    #     sleep(1)
