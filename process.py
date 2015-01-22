@@ -38,7 +38,7 @@ class CustomProcess(Process):
 class ProcessManager(object):
     """ProcessManager class"""
 
-    def __init__(self, processes=None):
+    def __init__(self, processes=None, start=False):
         """
         ProcessManager class init.
         Number of processes restricted to CPU count.
@@ -53,6 +53,7 @@ class ProcessManager(object):
         self.buffer = []
         self.queue = Queue()
         self.callbacks = {}
+        self.start_on_add = start
 
     def __repr__(self):
         _added = len(self.processes) + len(self.buffer)
@@ -90,7 +91,8 @@ class ProcessManager(object):
             if callback:
                 self.callbacks[process] = callback
 
-            self.start()
+            if self.start_on_add:
+                self.start()
 
     def start(self):
         """
