@@ -90,6 +90,8 @@ class ProcessManager(object):
             if callback:
                 self.callbacks[process] = callback
 
+            self.start()
+
     def start(self):
         """
         ProcessManager start.
