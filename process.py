@@ -123,3 +123,13 @@ class ProcessManager(object):
                             _item.start()
                     # else:
                     #     sleep(1)
+
+    def abort(self):
+        """Abort every available added/started process"""
+        [item.terminate() for item in self.processes]
+        for item in self.buffer:
+            if item._popen:
+                self._popen.terminate()
+            else:
+                self.buffer.remove(item)
+        return
